@@ -7,6 +7,10 @@ use Auth;
 use Session;
 use App\User;
 
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
+use App\Response;
+
 class UsersController extends Controller
 {
     public function signup(Request $request)
@@ -66,12 +70,20 @@ class UsersController extends Controller
             // die;
 
             if (Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'admin' => null])) {
-                echo 'success';
+                Session::put('frontSession', $data['email']);
+                return redirect('/phase/2');
+                // echo 'success';
                 die;
             } else {
-                echo 'failed';
-                die;
+                // echo 'failed';
+                // die;
+                return redirect::back()->with('flash_message_error', 'Invalid Username or Password');
             }
         }
+    }
+
+    public function phase2(Request $request)
+    {
+        return view('users.phase2');
     }
 }

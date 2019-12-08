@@ -32,3 +32,5 @@ Route::get('/check-username', 'UsersController@checkUsername');
 Route::get('/check-email', 'UsersController@checkEmail')->name('check.email');
 
 Route::any('/signin', 'UsersController@signin');
+
+Route::any('/phase/2', 'UsersController@phase2');
