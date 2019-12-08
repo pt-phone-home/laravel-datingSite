@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use Auth;
 use Session;
 use App\User;
+use App\Admin;
+use App\UsersDetail;
+use App\Hobby;
+use App\Country;
+use App\Language;
+use App\Occupation;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
@@ -84,6 +90,31 @@ class UsersController extends Controller
 
     public function phase2(Request $request)
     {
-        return view('users.phase2');
+        if ($request->isMethod('POST')) {
+            $data = $request->all();
+            $userDetail = new UsersDetail;
+            $userDetail->user_id = Auth::User()['id'];
+            $userDetail->dob = $data['dob'];
+            $userDetail->gender = $data['gender'];
+            $userDetail->height = $data['height'];
+            $userDetail->marital_status = $data['marital_status'];
+            $userDetail->save();
+        }
+
+        $countries = Country::get();
+
+        $languages = Language::orderBy('name', 'ASC')->get();
+        $occupations = Occupation::orderBy('title', 'ASC')->get();
+
+        $hobbies = Hobby::orderBy('title', 'ASC')->get();
+        return view('users.phase2')->with(compact('countries', 'languages', 'hobbies', 'occupations'));
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        Session::forget('frontsession');
+        Session::forget('current_url');
+        return redirect()->action('FrontController@front');
     }
 }

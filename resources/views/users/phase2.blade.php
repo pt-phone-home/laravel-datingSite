@@ -9,7 +9,7 @@
                         <h1>Add Dating Profile</h1>
                         <h5>Add Dating Profile by filling out the below</h5>
                         <h1>Add Dating Profile</h1>
-                        <form action="{{ url('/signup') }}" id="" method="POST">
+                        <form action="{{ url('/phase/2') }}" id="" method="POST">
                             @csrf
                             <h1 class="">New User Registration</h1>
                             <h1 class="">Register</h1>
@@ -21,8 +21,8 @@
                             <label for="">Date Of Birth</label>
                             <select name="gender" id="">
                                 <option value="">Select</option>
-                                <option value="">Male</option>
-                                <option value="">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
                             </select>
                             <div>
                             <div class="form-group">
@@ -82,6 +82,97 @@
                                             <option value="7' 11'" @if(!empty($filloutformContent['height']) && $filloutformContent['height']=="7' 11'") selected="" @endif>7' 11"</option>
                                             <option value="8' 0'" @if(!empty($filloutformContent['height']) && $filloutformContent['height']=="8' 0'") selected="" @endif>8' 0"</option>
                                         </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Marital Status</label>
+
+                            </div>
+
+                            <div class="form-group">
+                                <select name="marital_status" style="width:208px; font-size: 14px; height: 25px;">
+                                    <option value="Unmarried" @if(!empty($filloutformContent['marital_status']) && $filloutformContent['marital_status']=="Unmarried") selected="" @endif>Unmarried</option>
+                                    <option value="Married"  @if(!empty($filloutformContent['marital_status']) && $filloutformContent['marital_status']=="Married") selected="" @endif>Married</option>
+                                    <option value="Divorced"  @if(!empty($filloutformContent['marital_status']) && $filloutformContent['marital_status']=="Divorced") selected="" @endif>Divorced</option>
+                                    <option value="Widowed"  @if(!empty($filloutformContent['marital_status']) && $filloutformContent['marital_status']=="Widowed") selected="" @endif>Widowed</option>
+                                    <option value="Seperated"  @if(!empty($filloutformContent['marital_status']) && $filloutformContent['marital_status']=="Seperated") selected="" @endif>Seperated</option>
+                                    <option value="Annulled"  @if(!empty($filloutformContent['marital_status']) && $filloutformContent['marital_status']=="Annulled") selected="" @endif>Annulled</option>
+                                    <option value="Other"  @if(!empty($filloutformContent['marital_status']) && $filloutformContent['marital_status']=="Other") selected="" @endif>Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Body Type</label>
+                            </div>
+                            <div class="form-group">
+                                <select name="body_type" style="width:208px; font-size: 14px; height: 25px;">
+                                    <option value="">Select</option>
+                                    <option value="slim">Slim</option>
+                                    <option value="average">Average</option>
+                                    <option value="athletic">Athletic</option>
+                                    <option value="heavy">Heavy</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Complexion</label>
+                            </div>
+                            <div class="form-group">
+                                <select name="complexion" style="width:208px; font-size: 14px; height: 25px;">
+                                    <option value="">Select</option>
+                                    <option value="very_fair">Very Fair</option>
+                                    <option value="fair">Fair</option>
+                                    <option value="wheatish">Wheatish</option>
+                                    <option value="dark">Dark</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Langauges</label>
+                            </div>
+                            <div class="form-group">
+                                <select name="languages[]" multiple style="width:208px; font-size: 14px; height: 25px;">
+                                    <option value="">Select</option>
+                                    @foreach($languages as $language)
+                                        <option value="{{ $language->name }}">{{ $language->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Hobbies</label>
+                            </div>
+                            <div class="form-group">
+                                <select name="hobbies[]" multiple style="width:208px; font-size: 14px; height: 25px;">
+                                    <option value="">Select</option>
+                                    @foreach($hobbies as $hobby)
+                                        <option value="{{ $language->title }}">{{ $language->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Country</label>
+                            </div>
+                            <div class="form-group">
+                                <select name="country" style="width:208px; font-size: 14px; height: 25px;">
+                                    <option value="">Select</option>
+                                    @foreach($countries as $country)
+                                        <option value="{{ $country->name }}">{{ $country->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Highest Education</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" autocomplete="off" id="education" >
+                            </div>
+                            <div class="form-group">
+                                <label for="">Occupation</label>
+                            </div>
+                            <div class="form-group">
+                                <select name="occupation" id="occupations">
+                                    <option value="">Select</option>
+                                    @foreach($occupations as $occupation)
+                                        <option value="{{ $occupation->title }}">{{ $occupation->title }}</option>
+
+                                    @endforeach
+                                </select>
                             </div>
                             <td><input type="submit" name="submit" class="button" value="Submit"></td>
                         </form>
