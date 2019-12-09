@@ -174,6 +174,36 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label for="">Income</label>
+                            </div>
+                            <div class="form-group">
+                                <select name="income" id="income">
+                                   <option value="">Select</option>
+                                   <option value="under $25,000">Under $25,000</option>
+                                   <option value="$25,000 - $50,000">$25,000 - $50,000</option>
+                                   <option value="$50,001 - $75,000">$50,001 - $75,000</option>
+                                   <option value="$75,001 - $100,000">$75,001 - $100,000</option>
+                                   <option value="$100,001 - $150,000">$100,001 - $150,000</option>
+                                   <option value="$150,001 - $200,000">$150,001 - $200,000</option>
+                                   <option value="Over $200,000">Over $200,000</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">About Me:</label>
+                            </div>
+                            <div class="form-group">
+                                <textarea name="about_myself" id="about_myself" cols="30" rows="10"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="">About My Ideal Partner:</label>
+                            </div>
+                            <div class="form-group">
+                                <strong>Partner Details:</strong>
+                            </div>
+                            <div class="form-group">
+                                <textarea name="about_partner" id="about_partner" cols="30" rows="10"></textarea>
+                            </div>
                             <td><input type="submit" name="submit" class="button" value="Submit"></td>
                         </form>
                     </div>

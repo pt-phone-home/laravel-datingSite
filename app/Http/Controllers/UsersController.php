@@ -92,6 +92,9 @@ class UsersController extends Controller
     {
         if ($request->isMethod('POST')) {
             $data = $request->all();
+            echo "<pre>";
+            print_r($data);
+            die;
             $userDetail = new UsersDetail;
             $userDetail->user_id = Auth::User()['id'];
             $userDetail->dob = $data['dob'];
