@@ -44,4 +44,9 @@ class User extends Authenticatable
 
     public function filloutformProfileExists()
     { }
+
+    public function details()
+    {
+        return $this->hasOne('App\UsersDetail', 'user_id');
+    }
 }
