@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['admin']], function () {
     Route::get('admin/dashboard', 'AdminController@dashboard');
     Route::get('/settings', 'AdminController@settings');
+    Route::get('/admin/view_users', 'UsersController@viewusers');
 });
 
 Route::match(['get', 'post'], '/admin', 'AdminController@login');
@@ -34,3 +35,7 @@ Route::get('/check-email', 'UsersController@checkEmail')->name('check.email');
 Route::any('/signin', 'UsersController@signin');
 
 Route::any('/phase/2', 'UsersController@phase2');
+
+Route::get('/inreview', 'UsersController@inreview');
+
+Route::get('/logout', 'UsersController@logout');

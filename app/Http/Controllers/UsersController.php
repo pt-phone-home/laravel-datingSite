@@ -34,8 +34,8 @@ class UsersController extends Controller
             $user->password = bcrypt($data['password']);
             $user->save();
 
-            if (Auth::attempt(['name' => $data['name'], 'password' => $data['password'], 'admin' => '0'])) {
-                Session::put('frontSession', $data['name']);
+            if (Auth::attempt(['email' => $data['name'], 'password' => $data['password'], 'admin' => null])) {
+                Session::put('frontSession', $data['email']);
                 return redirect('/phase/2');
             };
         }
@@ -90,17 +90,89 @@ class UsersController extends Controller
 
     public function phase2(Request $request)
     {
+
+        $userFormCount = UsersDetail::where(['user_id' => Auth::user()['id'], 'status' => 0])->count();
+
+        if ($userFormCount > 0) {
+            return redirect('/inreview');
+        }
+
         if ($request->isMethod('POST')) {
             $data = $request->all();
-            echo "<pre>";
-            print_r($data);
-            die;
+            // echo "<pre>";
+            // print_r($data);
+            // die;
+            if (empty($data['user_id'])) {
+                $userDetail = new UsersDetail;
+                $userDetail->user_id = Auth::User()['id'];
+            } else {
+                $userDetail = UsersDetail::where('user_id', $data['user_id'])->first();
+                $userDetail->status = 0;
+            }
             $userDetail = new UsersDetail;
             $userDetail->user_id = Auth::User()['id'];
             $userDetail->dob = $data['dob'];
             $userDetail->gender = $data['gender'];
             $userDetail->height = $data['height'];
             $userDetail->marital_status = $data['marital_status'];
+            // $userDetail->save();
+
+            if (empty($data['body_type'])) {
+                $data['body_type'] = '';
+            }
+
+            if (empty($data['city'])) {
+                $data['city'] = '';
+            }
+
+            if (empty($data['state'])) {
+                $data['state'] = '';
+            }
+            if (empty($data['country'])) {
+                $data['country'] = '';
+            }
+            if (empty($data['education'])) {
+                $data['education'] = '';
+            }
+            if (empty($data['occupation'])) {
+                $data['occupation'] = '';
+            }
+            if (empty($data['income'])) {
+                $data['income'] = '';
+            }
+            if (empty($data['complexion'])) {
+                $data['complexion'] = '';
+            }
+
+            $userDetail->body_type = $data['body_type'];
+            $userDetail->complexion = $data['complexion'];
+            $userDetail->city = $data['city'];
+            $userDetail->state = $data['state'];
+            $userDetail->country = $data['country'];
+            $userDetail->languages = $data['languages'];
+            $userDetail->education = $data['education'];
+            $userDetail->occupation = $data['occupation'];
+            $userDetail->income = $data['income'];
+            $userDetail->about_myself = $data['about_myself'];
+            $userDetail->about_partner = $data['about_partner'];
+
+            $hobbies = '';
+            if (empty($hobbies)) {
+                foreach ($data['hobbies'] as $hobby) {
+                    $hobbies .= $hobby . ', ';
+                }
+            }
+
+            $userDetail->hobbies = $hobbies;
+
+            $languages = '';
+            if (empty($languages)) {
+                foreach ($data['languages'] as $language) {
+                    $languages .= $language . ', ';
+                }
+            }
+
+            $userDetail->languages = $languages;
             $userDetail->save();
         }
 
@@ -119,5 +191,23 @@ class UsersController extends Controller
         Session::forget('frontsession');
         Session::forget('current_url');
         return redirect()->action('FrontController@front');
+    }
+
+    public function inreview()
+    {
+        return view('users.inreview');
+    }
+
+    public function viewusers()
+    {
+        $users = User::with('details')->get();
+
+        $users = json_decode(json_encode($users), true);
+
+        // echo "<pre>";
+        // print_r($users);
+        // die;
+
+        return view('admin.users.view_users')->with('users', $users);
     }
 }

@@ -9,7 +9,7 @@
                         <h1>Add Dating Profile</h1>
                         <h5>Add Dating Profile by filling out the below</h5>
                         <h1>Add Dating Profile</h1>
-                        <form action="{{ url('/phase/2') }}" id="" method="POST">
+                        <form action="{{ url('/phase/2') }}" id="recordForm" name="recordForm" method="POST">
                             @csrf
                             <h1 class="">New User Registration</h1>
                             <h1 class="">Register</h1>
