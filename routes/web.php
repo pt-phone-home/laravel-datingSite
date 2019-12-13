@@ -23,6 +23,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('admin/dashboard', 'AdminController@dashboard');
     Route::get('/settings', 'AdminController@settings');
     Route::get('/admin/view_users', 'UsersController@viewusers');
+    Route::post('/admin/update-user-status', 'UsersController@updateUserStatus');
 });
 
 Route::match(['get', 'post'], '/admin', 'AdminController@login');

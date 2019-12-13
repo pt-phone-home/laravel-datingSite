@@ -47,6 +47,7 @@
 
             <div class="modal-header">
             <h5 class=modal-title>User Details</h5>
+                
 
               <button class="close" data-dismiss="modal">
                 

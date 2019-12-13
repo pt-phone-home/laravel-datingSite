@@ -16,7 +16,7 @@
                 @csrf
                 <fieldset>
                     <div class="form-group">
-                        <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="Username">
+                        <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="Email">
                     </div>
                     <div class="form-group">
                         <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Password">

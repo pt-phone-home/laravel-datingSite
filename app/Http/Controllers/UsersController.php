@@ -210,4 +210,10 @@ class UsersController extends Controller
 
         return view('admin.users.view_users')->with('users', $users);
     }
+
+    public function updateUserStatus(Request $request)
+    {
+        $data = $request->all();
+        UsersDetail::where('user_id', $data['user_id'])->update(['status' => $data['status']]);
+    }
 }
